@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>A Prototype of Disaster Data Management System in the U-Tapao Cathment using Google Map</title>
+<script src="js/jquery.js"></script>
+<script>
+$(function(){
+  $('#backBtn1').click(function(){
+    window.history.back();
+  });
+});
+</script>
+</head>
+<style>
+body{
+	background-size:contain;
+}
+#map-canvas2 {
+	top:0;
+	left:0;
+	width:99%;
+	height: 400px;
+	border-width:3px; border-style:solid;
+	border-color:#FFF;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;;
+}
+#comName{
+	display:none;
+}
+
+</style>
+<body>
+<form id="regisForm2" name="registForm2" action="createGeneralAccout.php" method="post">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0" style="font-size:0.9em; border-radius:3px; border:solid; border-color:#CCC; border-width:1px; padding-left:5px; height:30px; padding:1px 20px 10px 20px; background-color:#FFF; font-family:Arial, Helvetica, sans-serif;">
+      <tr>
+        <td align="center" bgcolor="#FFFFFF" style="padding-top:50px;"><img src="images/hdLogo.png" width="258" height="181" /></td>
+        </tr>
+      <tr>
+        <td align="center" bgcolor="#FFFFFF"><strong><font size="+1">“ต้นแบบระบบสารสนเทศเพื่อการจัดการข้อมูลพิบัติภัยในพื้นที่ลุ่มน้ำอู่ตะเภาโดยใช้ Google Map”</font>
+          <br />
+          โดย อ.เทิดทูน  ดำรงค์ฤทธามาตย์ และ ผศ.เถกิง วงศ์ศิริโชติ
+ภาควิชาวิทยาศาสตร์ประยุกต์ คณะวิทยาศาสตร์ มหาวิทยาลัยสงขลานครินทร์ <br />
+        </strong>(ภายใต้โครงการความร่วมมือเพื่อการพัฒนาเชิงพื้นที่จังหวัดสงขลาแบบสร้างสรรค์ ระหว่าง ม.อ. และ สกว. ปีที่ 1) </td>
+      </tr>
+      <tr>
+        <td bgcolor="#FFFFFF">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="40" align="center" bgcolor="#FFFFFF"><p align="center"><strong>บทคัดย่อ</strong> </p></td>
+      </tr>
+	  <!---------------->
+      <tr>
+        <td bgcolor="#FFFFFF"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เนื่องจากพื้นที่ลุ่มน้ำคลองอู่ตะเภาครอบคลุมพื้นที่ประมาณ 2,400 ตารางกิโลเมตร ซึ่งตั้งอยู่ทางตอนใต้ของ จังหวัดสงขลา  มีพื้นที่ลุ่มน้ำอยู่ในเขตอำเภอหาดใหญ่ อำเภอคลองหอยโข่ง อำเภอนาหม่อม อำเภอสะเดา  อำเภอบางกล่ำ และบางส่วนอยู่ในเขตอำเภอเมืองและอำเภอควนเนียง  สภาพภูมิประเทศของลุ่มน้ำจะมีลักษณะเป็นแอ่งกระทะ
+          พื้นที่ลาดเทจากทิศใต้ในเขตอำเภอสะเดาลงสู่ทิศเหนือบริเวณทะเลสาบสงขลา  ในลุ่มน้ำคลองอู่ตะเภาโดยเฉลี่ยจะมีฝนตกตลอดทั้งปี ในปี 2531  ระดับน้ำท่วมเมืองหาดใหญ่ ระดับน้ำสูงเกือบ 2 เมตร  ส่วนปี 2543 ระดับน้ำสูง 3  เมตร และในปี 2553 ความลึกน้ำท่วมเฉลี่ย 1.50  เมตร ความลึกน้ำท่วมสูงสุด 3.30 เมตร  และมีปริมาณน้ำท่วมขัง 375 ล้านลูกบาศก์เมตร  <br />
+		  <br />
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       ในสถานการณ์น้ำท่วม  หน่วยงานของรัฐ โดยเฉพาะอย่างยิ่งมหาวิทยาลัยสงขลานครินทร์  จะจัดตั้งหน่วยประสานงานน้ำท่วมที่มีหน้าที่หลัก คณะผู้วิจัย คัดเลือก 2 ชุมชนนำร่องที่มีความเสี่ยงในการเกิดภัยพิบัติในพื้นที่หาดใหญ่  และมีการจัดทำระบบสารสนเทศเพื่อการจัดการข้อมูล  เพื่อจัดการข้อมูลภัยพิบัติในลุ่มน้ำอู่ตะเภาโดยใช้ Google Map และในขั้นตอนสุดท้ายของโครงการวิจัย คณะผู้วิจัยทำการสำรวจเพิ่มเติมอีก 4  ชุมชน ได้แก่ ชุมชนวัดหาดใหญ่ใน ชุมชนศาลาลุงทอง  ชุมชนมัสยิดบ้านเหนือ (คูเต่า) และชุมชนบ้านในสวน (ควนลัง) โดยได้สำรวจทั้งหมด 238, 100, 129  และ 77 ครัวเรือนตามลำดับ </p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;คณะผู้วิจัยได้ดำเนินการพัฒนาระบบสารสนเทศฯ  เพื่อเป็นช่องทางการสื่อสารเพื่อการเตือนภัย ประชาชนในพื้นที่สำรวจข้อมูล  รับทราบถึงการมีอยู่ของช่องทางแจ้งข้อมูลน้ำท่วมและได้ใช้ประโยชน์จากช่องทางต่างๆ ได้แก่  การเตือนภัยผ่านทางแอพพลิเคชันทางสมาร์ทโฟน การเตือนภัยผ่านทางข้อความสั้น (SMS)  นอกจากนี้ผู้วิจัยได้พัฒนาฟังก์ชันการทำงานสำหรับการร้องขอความช่วยเหลือเมื่อเกิดเหตุภัยพิบัติ  โดยแอพพลิเคชันที่พัฒนาขึ้นสามารถนำไปติดตั้งบนสมาร์ทโฟนที่ใช้ระบบปฏิบัติการแอนด์ดรอย  ผู้ประสบภัยสามารถส่งข้อมูลร้องความช่วยเหลือมายังเครื่องแม่ข่าย  โดยเครื่องแม่ข่ายจะแสดงข้อมูลบนแผนที่ โดยระบุตำแหน่งที่ตั้งของผู้ประสบภัยจาก GPS  ซึ่งทำให้ผู้ประสานงานการช่วยเหลือ สามารถรู้ตำแหน่งของผู้ประสบภัย  และสามารถบริหารจัดการเพื่อเข้าช่วยเหลือได้อย่างทันท่วงที</td>
+      </tr>
+	  <!------------------------>
+      <tr>
+        <td bgcolor="#FFFFFF" height="50">&nbsp;</td>
+      </tr>
+	  <tr>
+        <td bgcolor="#FFFFFF" align="center">
+          <a href="index.php"><input type="button" name="backBtn1" id="backBtn1" value="Back to main page" style="height:33px; width:200px; background-color:#39C; color:#fff;  border-radius:5px; border:solid; border-width:1px; border-color:#fff; cursor:pointer; font-weight:bold;" /></a>
+        </td>
+      </tr>
+      <tr>
+        <td bgcolor="#FFFFFF"><p>&nbsp;</p></td>
+        </tr>
+      <tr>
+        <td height="1" bgcolor="#CCCCCC"></td>
+        </tr>
+      <tr>
+        <td height="50" align="center" style="color:#000; padding-top:10px; font-size:0.8em; font-family:Arial, Helvetica, sans-serif;">Copyright ? A Prototype of Disaster Data Management System in the U-Tapao Cathment using Google Map - http://ictcluster.sci.psu.ac.th/dmis<br />
+          สาขาเทคโนโลยีสารสนเทศและการสื่อสาร คณะวิทยาศาสตร์ มหาวิทยาลัยสงขลานครินทร์, Research and Development Office (RDO)</td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

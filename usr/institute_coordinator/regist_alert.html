@@ -1,0 +1,175 @@
+<style media="screen">
+.required{
+  border-color: red;
+  background: #FFBCB2;
+}
+</style>
+
+  <body>
+    <form class="" name="loginForm" id=LoginForm>
+      <table width="900" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td style=" color: #06c; " align="left" colspan="2" >
+            <h2>เพิ่มข้อมูลการแจ้งเตือน</h2>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top:10px;" width="310" valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td>
+                  <label for="txtPhone">หมายเลขโทรศัพท์</label><br>
+                  <input type="text" name="txtPhone" id="txtPhone" class="ms-input-normal" placeholder="กรอกเฉพาะตัวเลข" >
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-top:10px;">
+                  <label for="txtReqname">ชื่อผู้แจ้ง</label><br>
+                  <input type="text" name="txtReqname" id="txtReqname" class="ms-input-normal" placeholder="กรอกชื่อผู้แจ้ง" >
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-top:10px;">
+                  <label for="txtReqname">ระดับความต้องการ</label><br>
+                  <div class="" style="padding-top:5px; padding-left: 20px;">
+                    <input type="radio" name="name" value="">ด่วนที่สุด <br>
+                    <input type="radio" name="name" value="">ด่วน <br>
+                    <input type="radio" name="name" value="" checked="">ปกติ <br>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-top:10px;">
+                  <label for="txtReqname">ความต้องการ</label><br>
+                  <div class="" style="padding-top:5px; padding-left: 20px;">
+                    <input type="checkbox" name="name" value="">อาหาร <br>
+                    <input type="checkbox" name="name" value="">ยารักษาโรค <br>
+                    <input type="checkbox" name="name" value="">อื่นๆ <br>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-top: 10px;">
+                  <label for="txtReqname">รายละเอียดอื่นๆ</label><br>
+                  <div class="" style="padding-top:5px; padding-left: 0px;">
+                    <textarea name="name" rows="8" cols="40" class="ms-input-normal"></textarea>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td valign="top">
+            <div class="">
+              <label for="txtPlace">ค้นหาสถานที่</label><br>
+              <input type="text" name="txtPlace" id="txtPlace" class="ms-input-normal" placeholder="กรอกชื่อถนน ตำบล เป็นต้น">
+              <button type="button" name="SearchPlace" id="SearchPlace" class="ms-btn btn-ms-primary" style="width:100px; height: 38px; background: url(../../images/bg_alpha1.png)"><i class="fa fa-search"></i></button>
+            </div>
+            <div  id="map2" style="height: 313px; background: #ccc; margin-top: 10px;">
+
+            </div>
+            <div class="" style="padding-top: 10px;">
+              <input type="text" name="txtLat" id="txtLat" class="ms-input-normal" placeholder="Latitute" style="width:200px;">
+              <input type="text" name="txtLng" id="txtLat" class="ms-input-normal" placeholder="Latitute" style="width:200px;">
+            </div>
+            <div class="" style="padding-top: 10px;">
+              <label for="txtReqname">กรอกรหัสผ่านผู้บันทึกข้อมูล</label><br>
+              <input type="password" name="txtPassword" id="txtPassword" class="ms-input-normal" placeholder="รหัสผ่าน">
+              <button type="button" name="btnLogin" id="btnLogin" class="ms-btn btn-ms-primary" style="width:293px;">เข้าสู่ระบบ</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top: 10px;">
+
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top: 10px;">
+
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+
+
+
+<script type="text/javascript">
+  $(function(){
+    $("#SearchPlace").click(function(){ // เมื่อคลิกที่ปุ่ม id=SearchPlace ให้ทำงานฟังก์ฃันค้นหาสถานที่
+        alert('d');
+        searchPlace();  // ฟังก์ฃันค้นหาสถานที่
+    });
+
+    $('#btnLogin').click(function(){
+      var check = 0;
+      $('.ms-input-text').removeClass('required');
+
+      if($('#txtUsername').val()==''){
+        $('#txtUsername').addClass('required');
+        check++;
+      }
+
+      if($('#txtPassword').val()==''){
+        $('#txtPassword').addClass('required');
+        check++;
+      }
+
+      if(check!=0){
+        return false;
+      }else{
+        $.post("system/authentication.php", {
+          username: $('#txtUsername').val(),
+          password: $('#txtPassword').val()
+          },
+          function(result){
+            if(result=='Y'){
+              window.location = 'system/redirect_user.php?aut_t=1';
+            }else{
+              swal("ขออภัย!", "ไม่พบข้อมูลบัญชีผู้ใช้ดังกล่าว หรือ รหัสผ่านผิดพลาด!", "warning");
+            }
+          }
+        );
+        return false;
+      }
+      return false;
+    });
+
+
+    $('#txtUsername').keyup(function(){
+      if($('#txtUsername').val()!=''){
+        $('#txtUsername').removeClass('required');
+      }
+    });
+
+    $('#txtPassword').keyup(function(){
+      if($('#txtPassword').val()!=''){
+        $('#txtPassword').removeClass('required');
+      }
+    });
+
+    function searchPlace(){ // ฟังก์ชัน สำหรับคันหาสถานที่ ชื่อ searchPlace
+      alert('a');
+  		var AddressSearch=$("#txtPlace").val();// เอาค่าจาก textbox ที่กรอกมาไว้ในตัวแปร
+  		if(geocoder){ // ตรวจสอบว่าถ้ามี Geocoder Object
+  			geocoder.geocode({
+  				 address: AddressSearch // ให้ส่งชื่อสถานที่ไปค้นหา
+  			},function(results, status){ // ส่งกลับการค้นหาเป็นผลลัพธ์ และสถานะ
+        			if(status == google.maps.GeocoderStatus.OK) { // ตรวจสอบสถานะ ถ้าหากเจอ
+  					var my_Point=results[0].geometry.location; // เอาผลลัพธ์ของพิกัด มาเก็บไว้ที่ตัวแปร
+  					map.setCenter(my_Point); // กำหนดจุดกลางของแผนที่ไปที่ พิกัดผลลัพธ์
+  					my_Marker.setMap(map); // กำหนดตัว marker ให้ใช้กับแผนที่ชื่อ map
+  					my_Marker.setPosition(my_Point); // กำหนดตำแหน่งของตัว marker เท่ากับ พิกัดผลลัพธ์
+  					$("#txtLat").val(my_Point.lat());  // เอาค่า latitude พิกัดผลลัพธ์ แสดงใน textbox id=lat_value
+  					$("#txtLng").val(my_Point.lng());  // เอาค่า longitude พิกัดผลลัพธ์ แสดงใน textbox id=lon_value
+  				}else{
+  					// ค้นหาไม่พบแสดงข้อความแจ้ง
+  					alert("Geocode was not successful for the following reason: " + status);
+  					$("#namePlace").val("");// กำหนดค่า textbox id=namePlace ให้ว่างสำหรับค้นหาใหม่
+  				 }
+  			});
+  		}
+  	}
+    // End searchplace function
+  });
+</script>
