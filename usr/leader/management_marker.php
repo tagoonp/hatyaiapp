@@ -98,7 +98,6 @@ require_once "../../system/check_authen.php";
     <script src="../../core/libraries/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../core/libraries/sweetalert/dist/sweetalert.css">
     <link rel="stylesheet" href="../../core/css/master.css" media="screen" charset="utf-8">
-
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
   </head>
   <body class="page-header-fixed bg-1">
@@ -185,7 +184,7 @@ require_once "../../system/check_authen.php";
       <div class="container-fluid main-content">
         <div class="page-title">
           <h1>
-            เพิ่มข้อมูล
+            เพิ่มข้อมูลหมุด
           </h1>
         </div>
         <div class="row">
@@ -195,7 +194,7 @@ require_once "../../system/check_authen.php";
                 <a href="index.php"></a><i class="fa fa-home"></i>
               </li>
               <li class="active">
-                เพิ่มข้อมูล
+                เพิ่มข้อมูลหมุด
               </li>
             </ul>
           </div>
@@ -209,10 +208,10 @@ require_once "../../system/check_authen.php";
 
                 <ul class="nav nav-tabs pull-right" data-tabs="tabs" id="tabs">
                   <li class="active">
-                    <a data-toggle="tab" href="#tab1"><i class="fa fa-comments"></i><span>เพิ่มบัญชีผู้ใช้งาน</span></a>
+                    <a data-toggle="tab" href="#tab1"><i class="fa fa-comments"></i><span>เพิ่มหมุดอื่นๆ</span></a>
                   </li>
                   <li>
-                    <a data-toggle="tab" href="#tab2"><i class="fa fa-table"></i><span>บัญชีผู้ใช้งาน</span></a>
+                    <a data-toggle="tab" href="#tab2"><i class="fa fa-table"></i><span>รายการหมุด</span></a>
                   </li>
                 </ul>
               </div>
@@ -228,107 +227,86 @@ require_once "../../system/check_authen.php";
                       </h3>
                       <div class="row">
                         <div class="form-group">
-                          <label class="control-label col-md-2">คำนำหน้า</label>
-                          <div class="col-md-7">
+                          <label class="control-label col-md-2">ประเภทสถานที่</label>
+                          <div class="col-md-9">
                             <select class="form-control" name="prefix" id="prefix">
-                              <?php
-                              $strSQL = "SELECT * FROM ".$prefix."prefix WHERE 1";
-                              $resultPrefix = $db->select($strSQL,false,true);
-                              if($resultPrefix){
-                                foreach($resultPrefix as $v){
-                                  ?>
-                                  <option value="<?php print $v['id_prefix']?>"><?php print $v['prefix_name'];?></option>
-                                  <?php
-                                }
-                              }
-                              ?>
+                              <option value="01" selected="">ศูนย์ประสานงานช่วยเหลือผู้ประสบภัย</option>
+                              <option value="02">บ้านพี่เลี้ยง</option>
                             </select>
                           </div>
                         </div>
                           <div class="form-group">
-                            <label class="control-label col-md-2">ชื่อ <span class="req" id="req1">*</span></label>
-                            <div class="col-md-7">
+                            <label class="control-label col-md-2">ชื่อสถานที่ <span class="req" id="req1">*</span></label>
+                            <div class="col-md-9">
                               <input class="form-control" placeholder="กรอกชื่อ" type="text" name="txtName" id="txtName">
                             </div>
                           </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-2">นามสกุล <span class="req" id="req2">*</span></label>
-                            <div class="col-md-7">
-                              <input class="form-control" placeholder="กรอกนามสกุล" type="text" name="txtLName" id="txtLName">
-                            </div>
-                          </div>
+
                           <div class="form-group">
                             <label class="control-label col-md-2">หมายเลขโทรศัพท์ <span class="req" id="req3">*</span></label>
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                               <input class="form-control" placeholder="กรอกgเฉพาะตัวเลข" type="text"  name="txtPhone" id="txtPhone">
                             </div>
                           </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-2">E-mail</label>
-                            <div class="col-md-7">
-                              <input class="form-control" placeholder="" type="text"  name="txtEmail" id="txtEmail">
-                            </div>
-                          </div>
+
                           <div class="form-group">
                             <label class="control-label col-md-2">ที่อยู่</label>
-                            <div class="col-md-7">
-                              <textarea name="address" id="address" rows="8" cols="40" class="form-control"></textarea>
+                            <div class="col-md-9">
+                              <textarea name="address" id="address" rows="4" cols="40" class="form-control"></textarea>
                             </div>
                           </div>
-
                       </div>
 
-                    </div>
-                    <!-- End col lg 5 -->
-                    <div class="col-lg-6">
                       <h3>
-                        ข้อมูลบัญชีผู้ใช้
+                        ข้อมูลบัญชีผู้ใช้/หัวหน้า/ผู้ดูแลศูนย์
                       </h3>
                       <div class="row">
-                        <div class="form-group">
-                          <label class="control-label col-md-2">ประเภทบัญชีผู้ใช้</label>
-                          <div class="col-md-7">
-                            <select class="form-control" name="type" id="type">
-                              <?php
-                              $strSQL = "SELECT * FROM ".$prefix."usertype WHERE usertype_id != '01'";
-                              $resultPrefix = $db->select($strSQL,false,true);
-                              if($resultPrefix){
-                                foreach($resultPrefix as $v){
-                                  ?>
-                                  <option value="<?php print $v['usertype_id']?>"><?php print $v['usertype_desc'];?></option>
-                                  <?php
-                                }
-                              }
-                              ?>
-                            </select>
-                          </div>
-                        </div>
+
                         <div class="form-group">
                           <label class="control-label col-md-2">ชื่อบัญชีผู้ใช้<br>Username</label>
-                          <div class="col-md-7">
+                          <div class="col-md-9">
                             <input class="form-control"  type="text"  name="username" id="username">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-md-2">รหัสผ่าน<br>Password</label>
-                          <div class="col-md-7">
+                          <div class="col-md-9">
                             <input class="form-control"  type="password" name="password" id="password">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-md-2">ยืนยันรหันผ่าน<br>Confirm password</label>
-                          <div class="col-md-7">
+                          <div class="col-md-9">
                             <input class="form-control"  type="password" name="password2" id="password2">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-md-2">&nbsp;</label>
-                          <div class="col-md-7">
+                          <div class="col-md-9">
                             <button type="submit" name="btnSaveuser" id="btnSaveuser" class="btn btn-primary" style="width: 100%;">บันทึกข้อมูล</button>
                           </div>
                         </div>
-
+                      </div>
                     </div>
+                    <!-- End col lg 5 -->
+                    <div class="col-lg-6">
+                      <div class="row" style="padding-top: 50px;">
+                        <div class="form-group">
+                          <label class="control-label col-md-2">พิกัดละติจูด</label>
+                          <div class="col-md-8">
+                            <input class="form-control"  type="text"  name="username" id="username">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-2">พิกัดลองติจูด</label>
+                          <div class="col-md-8">
+                            <input class="form-control"  type="text"  name="username" id="username">
+                          </div>
+                        </div>
+                        <h3>แผนที่</h3>
+                        <div class="col-lg-12" style="height: 400px; background: #ccc;" id="map-canvas2">
+                        </div>
+                      </div>
                     <hr>
                   </div>
                   <!-- End row -->
@@ -459,7 +437,7 @@ require_once "../../system/check_authen.php";
         </div>
       </div>
     </div>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAewI1LswH0coZUPDe8Pvy39j4sbxmgCZU&callback=initMap" async defer></script>
     <script type="text/javascript">
       $(document).ready(function() {
         $('#regisuser').submit(function(){
@@ -544,5 +522,96 @@ require_once "../../system/check_authen.php";
         });
       });
     </script>
+    <!-- <script type="text/javascript">
+      var HttPRequest = false;
+
+      function doCallAjax(inst) {
+		  HttPRequest = false;
+		  if (window.XMLHttpRequest) { // Mozilla, Safari,...
+			 HttPRequest = new XMLHttpRequest();
+			 if (HttPRequest.overrideMimeType) {
+				HttPRequest.overrideMimeType('text/html');
+			 }
+		  } else if (window.ActiveXObject) { // IE
+			 try {
+				HttPRequest = new ActiveXObject("Msxml2.XMLHTTP");
+			 } catch (e) {
+				try {
+				   HttPRequest = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {}
+			 }
+		  }
+
+		  if (!HttPRequest) {
+			 alert('Cannot create XMLHTTP instance');
+			 return false;
+		  }
+
+			var url = 'system/liststaff.php';
+			var pmeters = 'institute_id='+inst;
+			HttPRequest.open('POST',url,true);
+
+			HttPRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			// HttPRequest.setRequestHeader("Content-length", pmeters.length);
+			// HttPRequest.setRequestHeader("Connection", "close");
+			HttPRequest.send(pmeters);
+
+
+			HttPRequest.onreadystatechange = function()
+			{
+
+				 if(HttPRequest.readyState == 3)  // Loading Request
+				  {
+				   document.getElementById("mySpan").innerHTML = "Now is Loading...";
+				  }
+
+				 if(HttPRequest.readyState == 4) // Return Request
+				  {
+				   document.getElementById("mySpan").innerHTML = HttPRequest.responseText;
+				  }
+
+			}
+
+	   }
+
+     function assignWork(user,fullname){
+       swal({
+         title: "ยืนยันการมอบหมายงาน?",
+         text: "คุณต้องการให้ " + fullname + "ประสานความช่วยเหลือ?",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#DD6B55",
+         confirmButtonText: "ยืนยัน!",
+         closeOnConfirm: false
+       }, function(){
+        //  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+          $.post("system/update_alert.php", {
+            pid: $('#pid').val(),
+            nextStat: $('#inst').val(),
+            user: user
+            },
+            function(result){
+              if(result=='Y'){
+                // swal("บันทึกข้อมูลเรียบร้อย!", "คลิ๊ก OK เพื่อกลับสู่หน้าหลัก!", "success");
+                swal({
+                  title: "บันมึกข้อมูลเรียบร้อย",
+                  text: "คลิ๊ก OK เพื่อกลับสู่หน้าหลัก",
+                  type: "success",
+                  showCancelButton: false,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "OK!",
+                   closeOnConfirm: false
+                 }, function(){
+                   window.location = 'index.php';
+                 });
+              }else{
+                swal("ขออภัย!", "การบันทึกข้อมูลล้มเหลว!", "warning");
+              }
+            }
+          );
+          return false;
+       });
+     } //End function
+    </script> -->
   </body>
 </html>
